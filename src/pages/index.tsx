@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 
 import { stripe } from "../services/stripe";
@@ -40,7 +40,11 @@ export default function Home({ product }: HomeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+/**
+ * * getServerSideProps: vai fazer requisições sempre que a página for chamada (tipagem GetServerSideProps)
+ * * getStaticProps: chama de tempos e tempos e já retorna a página estática quando necessário (tipagem: GetStaticProps)
+ */
+export const getStaticProps: GetStaticProps = async () => {
   // retrive retorna apenas do produto em questão
   const price = await stripe.prices.retrieve("price_1JFzgBCZe9BA06FHic2Q95G7", {
     expand: ["product"],
@@ -58,5 +62,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       product,
     },
+    revalidate: 60 * 60 * 24, // 24 horas
   };
 };
