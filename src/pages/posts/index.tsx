@@ -40,6 +40,7 @@ export default function Posts({ posts }: PostsProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient();
 
+  // função do prismic para fetch das informações desejadas
   const response = await prismic.query(
     [Prismic.predicates.at("document.type", "post")],
     {
@@ -50,6 +51,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   // console.log(JSON.stringify(response, null, 2));
 
+  // organização das informações já no lado do servidor
   const posts = response.results.map((post) => {
     return {
       slug: post.uid,
