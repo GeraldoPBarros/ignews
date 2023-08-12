@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@prismicio/client": "^5.1.0",
+    "@prismicio/client": "5.1.0",
     "@stripe/stripe-js": "^1.19.1",
     "@types/axios": "^0.14.0",
     "@types/babel-core": "^6.25.7",
